@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstring>
+#include <cstdbool>
 
 using namespace std;
 
@@ -48,8 +50,8 @@ class ChildVector : public Vector
     if (Source.contents)
       {
 	contents = new int[length_of_array];
-	void *memcpy ((void*) contents , const (void*) Source.contents,
-		      length_of_array);
+	memcpy ((void*) contents, (const void*)Source.contents,
+		Source.length_of_array * sizeof(*Source.contents));
 	  }
     else contents = 0;
   }
@@ -68,54 +70,57 @@ ChildVector& ChildVector:: operator >> (const ChildVector& obj1)
 int main (int argc, char *argv[])
 {
   int length_of_array=0;
-  string* argument = NULL;
+  char* argument = NULL;
   bool shallow = false;
   bool deep = false;
   bool copy = false;
   bool reverse = false;
+  bool print_prev_vec = false;
+  bool print_current_vec = false; 
 
-  for (long int i=1; i<=argc; i++)
+  for (int i=1; i<=argc; i++)
     {
-      *argument = argv[i];
-      switch (argument)
-	{
-	case "-s": 
-	  { length_of_array = argv[i+1];
+      argument = argv[i];
+      
+      if(strcmp((const char *)argument, (const char *)"-s") == 0)
+	{	
+	  length_of_array = atoi((const char *) argv[i+1]); 
 	  break;
-	  }
-	case "-S": //Shallow copy
-	  {
-	    shallow = true;
-	    break;
-	  }
-	case "-D": //Deep copy
-	  {
-	    deep = true;
-	    break;
-	  }
-	case "-C": //copy previous vector to current vector
-	  {
-	    copy = true;
-	    break;
-	  }
-	case "-R"://reverse the content of the current vector
-	  {
-	    Vector obj1;
-	    //obj1.Rev();
-	    reverse = true;
-	    break;
-	  }
-	case "-O": //ouput the vector
-	  {
-	    //if (char a = 'p')
-	      // ????
-	      break;
-	  }
-	default :
-	  {
-	    cerr << "Unknown argument\n";
-	  }
 	}
+      else if(strcmp((const char *)argument, (const char *)"-S") == 0)
+	{
+	  shallow = true;
+	}
+      else if(strcmp((const char *)argument, (const char *)"-D") == 0)
+	{
+	}
+
+      else if(strcmp((const char *)argument, (const char *)"-C") == 0)
+	{
+	  
+	}
+      else if(strcmp((const char *)argument, (const char *)"-R") == 0)
+	{
+	  //reverse the content of the current vector
+	  Vector obj1;
+	  //obj1.Rev();
+	  reverse = true;
+	}
+      else if(strcmp((const char *)argument, (const char *)"-O") == 0)
+	{
+	  if (strcmp(argv[i+1],"p") == 0)
+	    print_prev_vec = true;
+	  else if (strcmp(argv[i+1],"c") == 0)
+	    print_current_vec = true;
+	  else 
+	    print_current_vec = true;	
+	}
+      else
+	{
+	cerr << "Unknown bad argument provided, exiting ! \n";
+	return -1;
+	}
+      
     }
 
   return 0;
