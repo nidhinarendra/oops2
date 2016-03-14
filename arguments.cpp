@@ -82,7 +82,10 @@ int main (int argc, char *argv[])
   bool copy = false;
   bool reverse_flag = false;
   bool print_prev_vec = false;
-  bool print_current_vec = false; 
+  bool print_current_vec = false;
+
+  Vector *current = NULL;
+  Vector *previous = NULL;
 
   for (int i=1; i<=argc; i++)
     {
@@ -128,6 +131,6 @@ int main (int argc, char *argv[])
 	}
       
     }
-
+  
   return 0;
 }
