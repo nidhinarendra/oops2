@@ -2,12 +2,14 @@
 
 using namespace std;
 
-class vector 
+class Vector 
 {
+private:
 int length_of_array;
 int* contents;
 
-vector (int in_length)
+public:
+Vector (int in_length)
 {
 contents = new int[in_length];
 for(int i = 0; i<=in_length; i++)
@@ -18,12 +20,32 @@ for(int i = 0; i<=in_length; i++)
 length_of_array = in_length;
 }
 
-~vector()
+~Vector()
 {
 delete[] length_of_array;
 length_of_array = 0;
 }
 
+};
+
+class ChildVector : public Vector
+{
+ChildVector::ChildVector(const ChildVector & Source)
+{
+length_of_array = Source.length_of_array; //Shallow copy as length_of_array is not a pointer
+
+if (Source.contents)
+{
+contents = new int[length_of_array];
+void *memcpy ((void*) contents , const (void*) Source.contents, length_of_array)
+}
+else contents = 0;
+}
+}
+
+
+
+};
 
 int main (int argc, char *argv[])
 {
