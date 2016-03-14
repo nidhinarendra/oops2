@@ -4,7 +4,7 @@ using namespace std;
 
 class Vector 
 {
-private:
+public:
   int length_of_array;
   int* contents;
 
@@ -18,13 +18,13 @@ public:
       }
 
     length_of_array = in_length;
-  }
+  };
 
   ~Vector()
   {
     delete[] contents;
     contents =  0;
-  }
+  };
 
   /*
   Rev()
@@ -41,7 +41,7 @@ public:
 
 class ChildVector : public Vector
 {
-  ChildVector::ChildVector(const ChildVector & Source)
+  ChildVector(const ChildVector & Source)
   { //Shallow copy as length_of_array is not a pointer
     length_of_array = Source.length_of_array;
 
@@ -49,64 +49,72 @@ class ChildVector : public Vector
       {
 	contents = new int[length_of_array];
 	void *memcpy ((void*) contents , const (void*) Source.contents,
-		      length_of_array)
+		      length_of_array);
 	  }
     else contents = 0;
   }
+
 };
 	
-ChildVector& ChildVector:: operator >> ()
+ChildVector& ChildVector:: operator >> (const ChildVector& obj1)
 {
   for (int i = 0; i<= length_of_array; i++)
     {
-      cout << contents[i];
+      cout << obj1.contents[i];
     }
-}
+};
 
 
 int main (int argc, char *argv[])
 {
   int length_of_array=0;
-  char* argument = NULL;
+  string* argument = NULL;
   bool shallow = false;
   bool deep = false;
   bool copy = false;
   bool reverse = false;
 
-  for (int i=0; i<=argc; i++)
+  for (long int i=1; i<=argc; i++)
     {
-      argument = argv[i];
+      *argument = argv[i];
       switch (argument)
 	{
 	case "-s": 
-	  length_of_array = argv[i+1];
+	  { length_of_array = argv[i+1];
 	  break;
-
+	  }
 	case "-S": //Shallow copy
-	  shallow = true;
-	  break;
-
-	case "-D": //Deep copy
-	  deep = true;
-	  break;
-
-	case "-C": //copy previous vector to current vector
-	  copy = true;
-	  break;
-
-	case "-R"://reverse the content of the current vector
-	  Vector obj1;
-	  //obj1.Rev();
-	  reverse = true;
-	  break;
-
-	case "-O": //ouput the vector
-	  if (char a = 'p')
-	    // ????
+	  {
+	    shallow = true;
 	    break;
-
+	  }
+	case "-D": //Deep copy
+	  {
+	    deep = true;
+	    break;
+	  }
+	case "-C": //copy previous vector to current vector
+	  {
+	    copy = true;
+	    break;
+	  }
+	case "-R"://reverse the content of the current vector
+	  {
+	    Vector obj1;
+	    //obj1.Rev();
+	    reverse = true;
+	    break;
+	  }
+	case "-O": //ouput the vector
+	  {
+	    //if (char a = 'p')
+	      // ????
+	      break;
+	  }
 	default :
-	  cerr << "Unknown argument\n";
+	  {
+	    cerr << "Unknown argument\n";
+	  }
 	}
     }
 
