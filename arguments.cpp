@@ -28,8 +28,8 @@ public:
     contents =  0;
   };
 
-  /*
-  Rev()
+  
+  Vector reverse()
   {
     for(int i=0; i<length_of_array-1; i++)
       {
@@ -37,14 +37,16 @@ public:
       }
     
   };
-  */
-
+  
 };
+
 
 class ChildVector : public Vector
 {
-  ChildVector(const ChildVector & Source)
-  { //Shallow copy as length_of_array is not a pointer
+  //copy constructor
+  ChildVector(const ChildVector & Source) : Vector (Source)
+  {
+    //Shallow copy as length_of_array is not a pointer
     length_of_array = Source.length_of_array;
 
     if (Source.contents)
@@ -56,16 +58,20 @@ class ChildVector : public Vector
     else contents = 0;
   }
 
+  //operator overlaod function
+  ChildVector operator >> (const ChildVector& obj1)
+  {
+    for (int i = 0; i<= length_of_array; i++)
+      {
+	cout << obj1.contents[i];
+      }
+  }
+
+  //copy destructor todo ??
+  
+
 };
 	
-ChildVector& ChildVector:: operator >> (const ChildVector& obj1)
-{
-  for (int i = 0; i<= length_of_array; i++)
-    {
-      cout << obj1.contents[i];
-    }
-};
-
 
 int main (int argc, char *argv[])
 {
@@ -74,7 +80,7 @@ int main (int argc, char *argv[])
   bool shallow = false;
   bool deep = false;
   bool copy = false;
-  bool reverse = false;
+  bool reverse_flag = false;
   bool print_prev_vec = false;
   bool print_current_vec = false; 
 
@@ -102,9 +108,9 @@ int main (int argc, char *argv[])
       else if(strcmp((const char *)argument, (const char *)"-R") == 0)
 	{
 	  //reverse the content of the current vector
-	  Vector obj1;
-	  //obj1.Rev();
-	  reverse = true;
+	  //Vector obj1;
+	  //obj1.reverse();
+	  reverse_flag = true;
 	}
       else if(strcmp((const char *)argument, (const char *)"-O") == 0)
 	{
