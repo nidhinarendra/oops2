@@ -22,19 +22,20 @@ public:
 
   ~Vector()
   {
-    delete[] length_of_array;
-    length_of_array = 0;
+    delete[] contents;
+    contents =  0;
   }
 
-  Vector::Reverse (const Vector& obj1)
+  /*
+  Rev()
   {
     for(int i=0; i<length_of_array-1; i++)
       {
-	obj1.contents[i] = obj1.contents[length_of_array - i - 1];
+	contents[i] = contents[length_of_array - i - 1];
       }
-
-  }
-
+    
+  };
+  */
 
 };
 
@@ -95,13 +96,13 @@ int main (int argc, char *argv[])
 
 	case "-R"://reverse the content of the current vector
 	  Vector obj1;
-	  obj1.Reverse(obj1)
-	    reverse = true;
+	  //obj1.Rev();
+	  reverse = true;
 	  break;
 
 	case "-O": //ouput the vector
 	  if (char a = 'p')
-	    ????
+	    // ????
 	    break;
 
 	default :
