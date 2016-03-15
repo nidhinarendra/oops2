@@ -109,6 +109,11 @@ int main (int argc, char* argv[])
 	}
        else if(strcmp((const char *)argument,(const char *) "-S") == 0)
 	{
+	  if (!cur)
+	    {
+	      cerr << "current vector is NULL\n";
+	      return -1;
+	    }
 	  cout << "\n" << "Inside -S\n"; 
 	  prev = cur;
 	  Vectorclass obj2 = *prev;	 
@@ -123,6 +128,12 @@ int main (int argc, char* argv[])
 	}
       else if(strcmp((const char *)argument, (const char *) "-D") == 0)
 	{
+	  if (!cur)
+	    {
+	      cerr << "current vector is NULL\n";
+	      return -1;
+	    }
+	  
 	  cout << "\n" << "Inside -D\n"; 
 	  prev = cur;
 	  ChildVectorclass obj3 = *cur;
@@ -137,6 +148,12 @@ int main (int argc, char* argv[])
 	}
       else if(strcmp ((const char *) argument, (const char*) "-C") == 0)
 	{
+	  if (!prev)
+	    {
+	      cerr << "previous vector is NULL\n";
+	      return -1;
+	    }
+
 	  cout << "Inside -C\n";
 	  cur = prev;
 
@@ -162,7 +179,10 @@ int main (int argc, char* argv[])
 	  if(cur) 
 	    (*cur).reverse();
 	  else
-	    cerr << "current vector is NULL";
+	    {
+	      cerr << "current vector is NULL";
+	      return -1;
+	    }
 	  
 	  (*prev).print();
 	  cout << "\n" << (*prev).contents <<"\n";
@@ -181,22 +201,42 @@ int main (int argc, char* argv[])
 	  
 	      if(strcmp ((const char *)argument_c_or_p, (const char*) "p") == 0)
 		{
+		  if(!prev)
+		    {
+		      cerr << "previous is NULL";
+		      return -1;
+		    }	      
 		  (*prev).print();
 		  i++;
 		}
 	      else if(strcmp ((const char *)argument_c_or_p, (const char*) "c") == 0)
 		{
+		  if(!cur)
+		    {
+		      cerr << "previous is NULL";
+		      return -1;
+		    }		  
 		  (*cur).print();
 		  i++;
 		}
 	      else
 		{
+		  if(!cur)
+		    {
+		      cerr << "previous is NULL";
+		      return -1;
+		    }		  
 		  (*cur).print();
 		  continue;
 		}
 	    }	  
 	  else /* this is called when "... -O" , that is the last argument*/
 	    {
+	      if(!cur)
+		{
+		  cerr << "previous is NULL";
+		  return -1;
+		}		  
 	      (*cur).print();
 	    }
 	}      
