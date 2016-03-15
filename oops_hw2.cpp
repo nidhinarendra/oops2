@@ -43,7 +43,10 @@ public:
   {
     for (int i=0; i<=length_vector_array-1;i++)
       {
-	cout << "content[" <<i << "]"<< "is" << contents[i] <<endl;
+	if(i != length_vector_array)
+	  cout << contents[i] << ",";
+	else
+	  cout << contents[i];
       }
   }
 
@@ -96,7 +99,6 @@ int main (int argc, char* argv[])
 	  cur = &obj1;
 	  (*cur).print();
 	  i++;
-	  //cout>>cur;
 	}
        else if(strcmp((const char *)argument,(const char *) "-S") == 0)
 	{
