@@ -1,0 +1,6 @@
+vector –s 3 –S -O
+vector –s 3 –S –R –O
+vector –s 3 –S –S –C –R –O p
+vector –s 3 –S –D –C –R –O p
+vector –s 3 –S –D –C –R -R –O p
+vector –s 3 –S –D –C –R -D -R –O p
