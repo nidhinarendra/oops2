@@ -43,10 +43,10 @@ public:
   {
     for (int i=0; i<=length_vector_array-1;i++)
       {
-	if(i != length_vector_array)
-	  cout << contents[i] << ",";
-	else
+	if(i == length_vector_array - 1)
 	  cout << contents[i];
+	else
+	  cout << contents[i] << ",";
       }
   }
 
@@ -102,33 +102,48 @@ int main (int argc, char* argv[])
 	}
        else if(strcmp((const char *)argument,(const char *) "-S") == 0)
 	{
-	  cout << "Inside -S\n"; 
+	  cout << "\n" << "Inside -S\n"; 
 	  prev = cur;
 	  Vectorclass obj2 = *prev;	 
 	  cur = &obj2;
 
+
 	  (*prev).print();
+	  cout << "\n" << &(*prev).contents <<"\n";
+		  
 	  (*cur).print();
+	  cout <<  "\n" << &(*cur).contents <<"\n"; 
+
 	}
       else if(strcmp((const char *)argument, (const char *) "-D") == 0)
 	{
-	  cout << "Inside -D\n"; 
+	  cout << "\n" << "Inside -D\n"; 
 	  prev = cur;
 	  ChildVectorclass obj3 = *cur;
 	  cur = &obj3;
 
 	  (*prev).print();
-	  cout << &(*prev).contents <<"\n";
+	  cout << "\n" << &(*prev).contents <<"\n";
 		  
 	  (*cur).print();
-	  cout << &(*cur).contents <<"\n"; 
+	  cout <<  "\n" << &(*cur).contents <<"\n"; 
 
 	}
       else if(strcmp ((const char *) argument, (const char*) "-C") == 0)
 	{
-	  cout << "Inside -C\n"; 
+	  cout << "Inside -C\n";
+	  cur = prev;
+	  /*
 	  prev = cur;
 	  Vectorclass obj4 = *cur;
+	  cur = &obj4;
+	  */
+	  (*prev).print();
+	  cout << "\n" << &(*prev).contents <<"\n";
+		  
+	  (*cur).print();
+	  cout << "\n" << &(*cur).contents <<"\n"; 
+	  
 	}
       else if(strcmp ((const char *) argument, (const char*) "-R") == 0)
 	{
@@ -139,10 +154,10 @@ int main (int argc, char* argv[])
 	    cerr << "current vector is NULL";
 	  
 	  (*prev).print();
-	  cout << &(*prev).contents <<"\n";
+	  cout << "\n" << &(*prev).contents <<"\n";
 		  
 	  (*cur).print();
-	  cout << &(*cur).contents <<"\n"; 
+	  cout << "\n" << &(*cur).contents <<"\n"; 
 
 
  	}
