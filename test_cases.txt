@@ -1,0 +1,29 @@
+-s 6 -C -D -R -O
+expected --   5,4,3,2,1,0
+getting -- Previous vector is NULL
+
+
+-s 6 -R -O
+expected -- 5,4,3,2,1,0
+getting -- Segmentation fault
+
+-s 3 -S -O
+expected -- 0,1,2
+getting 0,1,2
+
+-s 3 -S -R -O
+expected -- 2,1,0
+getting -- 2,1,0
+
+-s 4 -S -S -C -R -O p
+expected -- 3,2,1,0
+getting 3,2,1,0
+
+-s 3 -D -R -O
+expected -- 2,1,0
+geting -- 0,0,0
+
+
+-s 3 -S -S -D -R -O p
+expected -- 0,1,2
+getting -- 0,0,0
