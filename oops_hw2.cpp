@@ -4,6 +4,7 @@
 using namespace std;
 
 class Vectorclass {
+
 public:
   int length_vector_array;
   int * contents;
@@ -110,6 +111,8 @@ int main (int argc, char* argv[])
 	  cur = &obj1;
 	  (*cur).print();
 	  i++;
+
+	  prev = cur;
 	}
        else if(strcmp((const char *)argument,(const char *) "-S") == 0)
 	{
@@ -120,6 +123,7 @@ int main (int argc, char* argv[])
 	    }
 	  
 	  prev = cur;
+
 	  Vectorclass obj2 = *prev;	 
 	  cur = &obj2;
 
