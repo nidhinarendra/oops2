@@ -3,13 +3,13 @@
 #include <string>
 using namespace std;
 
-class Vector {
+class Vectorclass {
 private:
   int length_vector_array;
   int * contents;
 
 public:
-  Vector (int length)
+  Vectorclass (int length)
   {
     length_vector_array = length;
     contents = new int[length];
@@ -49,9 +49,9 @@ public:
 
 };
 
-/*class ChildVector : public Vector
+/*class ChildVectorclass : public Vectorclass
 {
-  ChildVector(const ChildVector & Source) : Vector(Source)
+  ChildVectorclass(const ChildVectorclass & Source) : Vectorclass(Source)
   {
     cout << "Entreing shallow copy" << endl;
     length_vector_array = Source.length_vector_array;
@@ -70,39 +70,41 @@ int main (int argc, char* argv[])
 {
   int length_of_array = 0;
   char * argument = NULL;
-  Vector *cur;
-  Vector *prev;
-  for (int i =1; i<=argc; i++)
+  Vectorclass *cur;
+  Vectorclass *prev;
+  for (int i=1; i<argc; i++)
     {
       argument = argv[i];
       if(strcmp((const char *)argument, (const char *) "-s") == 0)
 	{
 	  length_of_array = atoi((const char *) argv[i+1]);
-	  Vector obj1(length_of_array);
+	  Vectorclass obj1(length_of_array);
 	  obj1.Create_array();
 	  cur = &obj1;
 	}
-      /* else if(strcmp((const char *)argument,(const char *) "-S") == 0)
+       else if(strcmp((const char *)argument,(const char *) "-S") == 0)
 	{
 	  cout << "array lenght is " << length_of_array<<endl;
-	 ChildVector obj2;	 
-	 obj2.ChildVector();
-	 }*/
+	  prev = cur;
+	  Vectorclass obj2 = *prev;	 
+	  cur = &obj2;
+	 }
 
       else if(strcmp((const char *)argument, (const char *) "-D") == 0)
 	{
-	  Vector obj3(length_of_array);
+	  prev = cur;
+	  Vectorclass obj3(length_of_array);
 	  obj3.deep_copy();
 	}
 
       else if(strcmp ((const char *) argument, (const char*) "-C") == 0)
 	{
-	  Vector obj4(length_of_array);
+	  Vectorclass obj4(length_of_array);
 	  obj4.Copy(length_of_array);
 	}
       else if(strcmp ((const char *) argument, (const char*) "-R") == 0)
 	{
-	  Vector obj5(length_of_array);
+	  Vectorclass obj5(length_of_array);
 	  obj5.Reverse(length_of_array);
 	  break;
 	}
