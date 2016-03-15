@@ -16,7 +16,6 @@ public:
     cout << "Length of array is " << length_vector_array <<endl;
   }
 
-
   int Create_array()
   {
     for (int i=0; i<=length_vector_array-1;i++)
@@ -71,6 +70,8 @@ int main (int argc, char* argv[])
 {
   int length_of_array = 0;
   char * argument = NULL;
+  Vector *cur;
+  Vector *prev;
   for (int i =1; i<=argc; i++)
     {
       argument = argv[i];
@@ -79,6 +80,7 @@ int main (int argc, char* argv[])
 	  length_of_array = atoi((const char *) argv[i+1]);
 	  Vector obj1(length_of_array);
 	  obj1.Create_array();
+	  cur = &obj1;
 	}
       /* else if(strcmp((const char *)argument,(const char *) "-S") == 0)
 	{
@@ -104,6 +106,8 @@ int main (int argc, char* argv[])
 	  obj5.Reverse(length_of_array);
 	  break;
 	}
+      else 
+	{cout << "unknown argument" << argv[i];}
     }
 
 
