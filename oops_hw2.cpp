@@ -34,7 +34,6 @@ public:
 	temp = contents[length_vector_array - i -1];
 	contents[length_vector_array - i - 1] = contents[i];
 	contents[i] = temp;
-	cout << "Reverse" << contents[i] << endl;
       }
     return *contents;
   }
@@ -50,6 +49,14 @@ public:
       }
   }
 
+  void operator=(const Vectorclass& rhs)
+  {
+    for (int i=0; i<=length_vector_array-1;i++)
+      {
+	contents[i] = rhs.contents[i];
+      }
+  }
+  
   /*
   istream & operator>>(istream &in)//const Vectorclass &obj)
   {
@@ -107,12 +114,11 @@ int main (int argc, char* argv[])
 	  Vectorclass obj2 = *prev;	 
 	  cur = &obj2;
 
-
 	  (*prev).print();
-	  cout << "\n" << &(*prev).contents <<"\n";
+	  cout << "\n" << (*prev).contents <<"\n";
 		  
 	  (*cur).print();
-	  cout <<  "\n" << &(*cur).contents <<"\n"; 
+	  cout <<  "\n" << (*cur).contents <<"\n"; 
 
 	}
       else if(strcmp((const char *)argument, (const char *) "-D") == 0)
@@ -123,26 +129,31 @@ int main (int argc, char* argv[])
 	  cur = &obj3;
 
 	  (*prev).print();
-	  cout << "\n" << &(*prev).contents <<"\n";
+	  cout << "\n" << (*prev).contents <<"\n";
 		  
 	  (*cur).print();
-	  cout <<  "\n" << &(*cur).contents <<"\n"; 
+	  cout <<  "\n" << (*cur).contents <<"\n"; 
 
 	}
       else if(strcmp ((const char *) argument, (const char*) "-C") == 0)
 	{
 	  cout << "Inside -C\n";
 	  cur = prev;
+
+	  Vectorclass obj(length_of_array);
+	  obj = *prev;
+	  
+	  cur = &obj;
 	  /*
 	  prev = cur;
 	  Vectorclass obj4 = *cur;
 	  cur = &obj4;
 	  */
 	  (*prev).print();
-	  cout << "\n" << &(*prev).contents <<"\n";
+	  cout << "\n" << (*prev).contents <<"\n";
 		  
 	  (*cur).print();
-	  cout << "\n" << &(*cur).contents <<"\n"; 
+	  cout << "\n" << (*cur).contents <<"\n"; 
 	  
 	}
       else if(strcmp ((const char *) argument, (const char*) "-R") == 0)
@@ -154,10 +165,10 @@ int main (int argc, char* argv[])
 	    cerr << "current vector is NULL";
 	  
 	  (*prev).print();
-	  cout << "\n" << &(*prev).contents <<"\n";
+	  cout << "\n" << (*prev).contents <<"\n";
 		  
 	  (*cur).print();
-	  cout << "\n" << &(*cur).contents <<"\n"; 
+	  cout << "\n" << (*cur).contents <<"\n"; 
 
 
  	}
@@ -166,20 +177,33 @@ int main (int argc, char* argv[])
 	  cout << "Inside -O\n"; 
 	  if(argv[i+1])
 	    {
-	      char* argument_next = argv[i+1];
-	      if(strcmp ((const char *) argument_next, (const char*) "p") == 0)
-		(*prev).print();
+	      char* argument_c_or_p = argv[i+1];
+	  
+	      if(strcmp ((const char *)argument_c_or_p, (const char*) "p") == 0)
+		{
+		  (*prev).print();
+		  i++;
+		}
+	      else if(strcmp ((const char *)argument_c_or_p, (const char*) "c") == 0)
+		{
+		  (*cur).print();
+		  i++;
+		}
+	      else
+		{
+		  (*cur).print();
+		  continue;
+		}
+	    }	  
+	  else /* this is called when "... -O" , that is the last argument*/
+	    {
+	      (*cur).print();
 	    }
-	  else
-	    (*cur).print();
-	}
+	}      
       else 
-	{cout << "unknown argument" << argv[i];}
+	{cerr << "unknown argument" << argv[i];}
     }
-
   
-  cout << "End of processing"; 
-
+  //cout << "End of processing"; 
   return 0;
-
 }
