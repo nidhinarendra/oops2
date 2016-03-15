@@ -4,7 +4,7 @@
 using namespace std;
 
 class Vectorclass {
-private:
+public:
   int length_vector_array;
   int * contents;
 
@@ -49,21 +49,21 @@ public:
 
 };
 
-/*class ChildVectorclass : public Vectorclass
+class ChildVectorclass : public Vectorclass
 {
-  ChildVectorclass(const ChildVectorclass & Source) : Vectorclass(Source)
+  ChildVectorclass(const Vectorclass & Source) : Vectorclass(Source)
   {
     cout << "Entreing shallow copy" << endl;
     length_vector_array = Source.length_vector_array;
     if(Source.contents)
       {
-	contents = new ont[length_vector_array];
+	contents = new int[length_vector_array];
 	memcpy ((void *) contents, (const void *)Source.contents,
 		Source.length_vector_array * sizeof(*Source.contents));
       }
     else contents = 0;
-    }
-    };*/
+  }
+};
 
 
 int main (int argc, char* argv[])
@@ -93,8 +93,9 @@ int main (int argc, char* argv[])
       else if(strcmp((const char *)argument, (const char *) "-D") == 0)
 	{
 	  prev = cur;
-	  Vectorclass obj3(length_of_array);
-	  obj3.deep_copy();
+	  Vectorclass obj1(length_of_array);
+	  //ChildVectorclass obj3(length_of_array);
+	  //obj3.deep_copy();
 	}
 
       else if(strcmp ((const char *) argument, (const char*) "-C") == 0)
