@@ -103,16 +103,19 @@ int main (int argc, char* argv[])
       argument = argv[i];
       if(strcmp((const char *)argument, (const char *) "-s") == 0)
 	{
-	  if (tracing)
-	    cout << "Inside -s\n";
-	  
 	  length_of_array = atoi((const char *) argv[i+1]);
 	  Vectorclass obj1(length_of_array);
 	  cur = &obj1;
-	  (*cur).print();
 	  i++;
 
 	  prev = cur;
+	  
+	  if (tracing)
+	    {
+	      cout << "Inside -s\n";
+	      (*cur).print();
+	    }
+	  
 	}
        else if(strcmp((const char *)argument,(const char *) "-S") == 0)
 	{
