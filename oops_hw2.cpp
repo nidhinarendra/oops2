@@ -161,9 +161,23 @@ int main (int argc, char* argv[])
 
 
  	}
+      else if(strcmp ((const char *) argument, (const char*) "-O") == 0)
+	{
+	  cout << "Inside -O\n"; 
+	  if(argv[i+1])
+	    {
+	      char* argument_next = argv[i+1];
+	      if(strcmp ((const char *) argument_next, (const char*) "p") == 0)
+		(*prev).print();
+	    }
+	  else
+	    (*cur).print();
+	}
       else 
 	{cout << "unknown argument" << argv[i];}
     }
+
+  
   cout << "End of processing"; 
 
   return 0;
