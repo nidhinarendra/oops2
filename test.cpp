@@ -27,7 +27,7 @@ public:
     if ((length_vector_array % 2) == 0)
       middle = length_vector_array/2;
     else
-      middle = ((int)length_vector_array/2) - 1;
+      middle = ((int)length_vector_array / 2);
 	
     for (int i=0; i < middle; i++)
       {
