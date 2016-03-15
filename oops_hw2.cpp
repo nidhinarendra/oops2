@@ -47,6 +47,7 @@ public:
 	else
 	  cout << contents[i] << ",";
       }
+    cout << "\n";
   }
 
   void operator=(const Vectorclass& rhs)
@@ -95,12 +96,15 @@ int main (int argc, char* argv[])
   char * argument = NULL;
   Vectorclass *cur = NULL;
   Vectorclass *prev = NULL;
+  bool tracing = false;
   for (int i=1; i<argc; i++)
     {
       argument = argv[i];
       if(strcmp((const char *)argument, (const char *) "-s") == 0)
 	{
-	  cout << "Inside -s\n"; 
+	  if (tracing)
+	    cout << "Inside -s\n";
+	  
 	  length_of_array = atoi((const char *) argv[i+1]);
 	  Vectorclass obj1(length_of_array);
 	  cur = &obj1;
@@ -114,17 +118,22 @@ int main (int argc, char* argv[])
 	      cerr << "current vector is NULL\n";
 	      return -1;
 	    }
-	  cout << "\n" << "Inside -S\n"; 
+	  
 	  prev = cur;
 	  Vectorclass obj2 = *prev;	 
 	  cur = &obj2;
 
-	  (*prev).print();
-	  cout << "\n" << (*prev).contents <<"\n";
-		  
-	  (*cur).print();
-	  cout <<  "\n" << (*cur).contents <<"\n"; 
-
+	  if (tracing)
+	  {
+	    cout << "\n" << "Inside -S\n";
+	    
+	    (*prev).print();
+	    cout << "\n" << (*prev).contents <<"\n";
+	    
+	    (*cur).print();
+	    cout <<  "\n" << (*cur).contents <<"\n";
+	  }
+	    
 	}
       else if(strcmp((const char *)argument, (const char *) "-D") == 0)
 	{
@@ -134,17 +143,21 @@ int main (int argc, char* argv[])
 	      return -1;
 	    }
 	  
-	  cout << "\n" << "Inside -D\n"; 
+	  
 	  prev = cur;
 	  ChildVectorclass obj3 = *cur;
 	  cur = &obj3;
-
-	  (*prev).print();
-	  cout << "\n" << (*prev).contents <<"\n";
-		  
-	  (*cur).print();
-	  cout <<  "\n" << (*cur).contents <<"\n"; 
-
+	  
+	  if (tracing)
+	  {
+	    cout << "\n" << "Inside -D\n"; 
+	    (*prev).print();
+	    cout << "\n" << (*prev).contents <<"\n";
+	    
+	    (*cur).print();
+	    cout <<  "\n" << (*cur).contents <<"\n";
+	  }
+	  
 	}
       else if(strcmp ((const char *) argument, (const char*) "-C") == 0)
 	{
@@ -154,28 +167,26 @@ int main (int argc, char* argv[])
 	      return -1;
 	    }
 
-	  cout << "Inside -C\n";
 	  cur = prev;
 
 	  Vectorclass obj(length_of_array);
 	  obj = *prev;
-	  
 	  cur = &obj;
-	  /*
-	  prev = cur;
-	  Vectorclass obj4 = *cur;
-	  cur = &obj4;
-	  */
-	  (*prev).print();
-	  cout << "\n" << (*prev).contents <<"\n";
-		  
-	  (*cur).print();
-	  cout << "\n" << (*cur).contents <<"\n"; 
+
+	  
+	  if (tracing)
+	    {
+	      cout << "Inside -C\n";
+	      (*prev).print();
+	      cout << "\n" << (*prev).contents <<"\n";
+	      
+	      (*cur).print();
+	      cout << "\n" << (*cur).contents <<"\n";
+	    }
 	  
 	}
       else if(strcmp ((const char *) argument, (const char*) "-R") == 0)
 	{
-	  cout << "Inside -R\n"; 
 	  if(cur) 
 	    (*cur).reverse();
 	  else
@@ -184,17 +195,22 @@ int main (int argc, char* argv[])
 	      return -1;
 	    }
 	  
-	  (*prev).print();
-	  cout << "\n" << (*prev).contents <<"\n";
-		  
-	  (*cur).print();
-	  cout << "\n" << (*cur).contents <<"\n"; 
-
+	  if (tracing)
+	    {
+	      cout << "Inside -R\n"; 
+	      (*prev).print();
+	      cout << "\n" << (*prev).contents <<"\n";
+	      
+	      (*cur).print();
+	      cout << "\n" << (*cur).contents <<"\n"; 
+	    }
 
  	}
       else if(strcmp ((const char *) argument, (const char*) "-O") == 0)
 	{
-	  cout << "Inside -O\n"; 
+	  if (tracing)
+	    cout << "Inside -O\n";
+	  
 	  if(argv[i+1])
 	    {
 	      char* argument_c_or_p = argv[i+1];
@@ -244,6 +260,7 @@ int main (int argc, char* argv[])
 	{cerr << "unknown argument" << argv[i];}
     }
   
-  //cout << "End of processing"; 
+  if (tracing)
+    cout << "End of processing"; 
   return 0;
 }
